@@ -10,7 +10,8 @@ resumeRouter.route('/')
 
   .get( ( req, res, next ) => {
     try{
-      switch(req.params.q) {
+      console.log(req.query.q);
+      switch(req.query.q) {
         case 'Phone':
           res.send('678-451-8485');
           break;
@@ -38,11 +39,11 @@ resumeRouter.route('/')
         case 'Position':
           res.send('Web Developer');
           break;
-        case 'Years';
+        case 'Years':
           res.send('1');
           break;
         case 'Puzzle':
-          const answer = puzzleFunc(req.params.q);
+          const answer = puzzleFunc(req.query.q);
           res.send(answer);
           break;
         default:

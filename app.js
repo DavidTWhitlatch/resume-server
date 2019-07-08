@@ -21,7 +21,5 @@ app.use((e, req, res, next) => {
 });
 
 
-module.exports = {
-  app
-};
+module.exports = app;
 
