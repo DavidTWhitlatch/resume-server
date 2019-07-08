@@ -18,7 +18,7 @@ resumeRouter.route('/')
         case 'Name':
           res.send('David Thomas Whitlatch');
           break;
-        case 'Email':
+        case 'Email+Address':
           res.send('davidtwhitlatch@gmail.com');
           break;
         case 'Referrer':
