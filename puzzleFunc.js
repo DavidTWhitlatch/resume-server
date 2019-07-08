@@ -6,7 +6,7 @@ const splitPuzzle = question => {
 const handleOddPos = result => {
   let positions = result.map(( letter ) => {
     return letter.split('').findIndex((char, index) =>{
-        return char !== '-';
+      return char !== '-';
     });
   })
   let oddPosition = positions.find(element => {
@@ -32,7 +32,32 @@ const handleLeft = result => {
 }
 
 const handleEquals = ( result, puzzle ) => {
-
+  const puzzleString = puzzle.reduce((string, letter) => {
+    return string + letter
+  }).replace(/-/g, '');
+  const reversedArray = puzzleString.split('').map(char =>{
+    return char === '<' ? '>' : '<';
+  })
+ let answer = [];
+  console.log(puzzleString)
+  puzzle.forEach(( letter, index ) => {
+    if (letter.includes('=')){
+      let temp = '';
+      let counter = 0;
+      let equalsLetter = result[index].split('').map(char => {
+        if (char === '-') {
+          temp += reversedArray[counter];
+          counter += 1;
+        } else {
+          temp += char
+        }
+      })
+      answer.push(temp);
+    } else {
+      answer.push(result[index]);
+    }
+  })
+  return answer;
 }
 
 const setEquals = result => {
@@ -44,7 +69,7 @@ const setEquals = result => {
 }
 
 const handleJoin = result => {
-  let answer = ['  ABCD'];
+  let answer = [' ABCD'];
   result.forEach(( letter, index ) => {
     answer.push(['A', 'B', 'C', 'D'][index] + letter)
   })
@@ -58,6 +83,8 @@ const puzzleFunc = question => {
   result = handleOddPos(result);
   result = handleLeft(result);
   result = setEquals(result);
+  result = handleEquals(result, puzzle);
+  console.log(result);
   result = handleJoin(result);
   console.log(result);
   return result;
