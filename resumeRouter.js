@@ -49,7 +49,6 @@ resumeRouter.route('/')
           res.send('OK');
           break;
       }
-    res.send('OK')
     } catch (e) {
       next(e)
     }
