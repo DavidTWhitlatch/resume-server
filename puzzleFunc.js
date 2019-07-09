@@ -34,18 +34,27 @@ const handleOddPos = (result) => {
 
 const handleRight = (result, puzzle) => {
   const { oddIndex } = oddPositions(puzzle);
+  let rightRight;
+  puzzle.forEach((letter, index) => {
+    if (letter.includes('>') && index !==oddIndex) {
+      rightRight = index;
+    }
+  })
   const swapLetters = puzzle.filter((letter, index) => {
-    return !letter.includes('=') && index !== oddIndex;
+    return !letter.includes('=') && index !== rightRight;
   });
   const swapChars = swapLetters.map((letter) => {
     return letter.split('').filter(char => char !== '-').join('');
   });
+  console.log(swapChars);
   return result.map((letter) => {
     let counter = swapChars.length - 1;
     return letter.split('').map((char) => {
       let newChar;
       if (char === '-') {
         newChar = swapChars[counter];
+        console.log(newChar, counter)
+        console.log(letter)
         counter -= 1;
       } else {
         newChar = char;
